@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+        }
+        #canvas {
+
+        }
+
+
+    </style>
+</head>
+<body>
+
+
+<canvas id="canvas" ></canvas>
+
+
+
+
+<!--  -->
+<script type="module">
+    import Graphics from './index2.js'; // не {User}, просто User
+    let test = new Graphics('canvas');
+
+
+  //  test.scaling();
+
+
+/*
+    window.onresize = function () {
+        test.setWidth(window.innerWidth);
+        test.setHeight(window.innerHeight);
+    }
+    */
+
+    import {Defaults} from './defaults.js';
+    window.onload = init;
+    let x = 0,y;
+    let flag = true;
+    function init()
+ {
+    test.scaling();
+    test.grid();
+
+  }
+
+
+
+
+    window.onresize = init;
+
+
+    /*
+    onmousedown = function (e) {
+        console.log(e);
+        move(e);
+        function move(e) {
+            let x =  e.offsetX -  e.composedPath()[0].width/2;
+            let y = e.offsetY - e.composedPath()[0].height/2;
+            Defaults.Grid.transferX = x;
+            Defaults.Grid.transferY = y;
+        }
+        onmousemove = function(e)
+        {
+            move(e);
+
+        };
+
+        onmouseup = function()
+        {
+            onmousemove = null;
+            onmouseup = null;
+        }
+    }
+
+
+    ondragstart = function() {return false;};
+ */
+    /*------------------------------------------------------------------*/
+
+
+
+  //  let rect = test.canvas;
+   // console.log(rect)
+   // rect.onmousedown = function (e) {
+    //   let rect =  test.canvas.getBoundingClientRect();
+   ///     let left = e.x;
+     //   let top = e.y;
+       // let right = rect.width + left;
+      //  let bottom  = rect.height + top;
+
+    //    console.log(rect)
+    //    console.log(e)
+       // console.log(bottom)
+  //  }
+
+/*
+    test.canvas.onmousedown = (e) =>
+    {
+        move(e);
+
+        function move(e) {
+        //    Defaults.Grid.transferX = e.x;
+        //    Defaults.Grid.transferY = e.y;
+            console.log(e);
+            console.log(e.y);
+        }
+
+        document.onmousemove = function(e)
+        {
+            move(e);
+            init();
+        };
+
+        test.canvas.onmouseup = function()
+        {
+            document.onmousemove = null;
+            test.canvas.onmouseup = null;
+        };
+
+    }
+    test.canvas.ondragstart = function()
+    {
+       return false;
+     };
+
+*/
+  //  test.canvas.onmousedown = function(e) {
+/*
+            move(e);
+
+            function move(e){
+                Defaults.Grid.transferX = e.pageX;
+                Defaults.Grid.transferY = e.pageY;
+            }
+
+        document.onmousemove = function(e) {
+            move(e);
+            console.log(e);
+            init();
+        };
+
+        test.canvas.onmouseup = function() {
+            document.onmousemove = null;
+            test.canvas.onmouseup = null;
+
+        };
+*/
+  //  }
+
+
+  //  test.canvas.ondragstart = function() {
+   //     return false;
+  //  };
+
+
+
+
+</script>
+</body>
+</html>
