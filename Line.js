@@ -16,27 +16,36 @@ export default class line {
         //Параметры из defaults
         else
         {
-            this.scalingWidth = scalingWidth;
-            this.scalingHeight = scalingHeight;
+            this.scalingWidth = Defaults.Grid.scalingWidth;
+            this.scalingHeight = Defaults.Grid.scalingHeight;
         }
     }
 
-    Right(width){
+    Right(){
         this.ctx.beginPath(); //Создаем новый путь
         this.ctx.strokeStyle = "#9017db"; //Цвет
         this.ctx.lineWidth = 3; //Размер
-        this.ctx.moveTo(this.ctx.canvas.width/2 - Math.abs(Defaults.Grid.transferX),this.ctx.canvas.height/2 + Defaults.Grid.transferY); //С какой точки начать
-        this.ctx.lineTo(this.ctx.canvas.width/2 + this.ctx.canvas.width + Math.abs(Defaults.Grid.transferX),this.ctx.canvas.height/2 + Defaults.Grid.transferY); //Куда двигаться
+        this.ctx.moveTo(this.ctx.canvas.width/2 - Math.abs(Defaults.transferX),this.ctx.canvas.height/2 + Defaults.transferY); //С какой точки начать
+        this.ctx.lineTo(this.ctx.canvas.width/2 + this.ctx.canvas.width + Math.abs(Defaults.transferX),this.ctx.canvas.height/2 + Defaults.transferY); //Куда двигаться
         this.ctx.closePath(); //Закрываем путь
         this.ctx.stroke();//Рисуем
-    }
 
-    Left(width){
         this.ctx.beginPath();
         this.ctx.strokeStyle = "#9017db";
         this.ctx.lineWidth = 3;
-        this.ctx.moveTo(this.ctx.canvas.width/2 + Defaults.Grid.transferX,this.ctx.canvas.height/2 + Defaults.Grid.transferY);
-        this.ctx.lineTo(-this.ctx.canvas.width,this.ctx.canvas.height/2 + Defaults.Grid.transferY);
+        for (let m =60; m < this.ctx.canvas.width + Defaults.transferX + Defaults.transferY; m+= this.scalingWidth) {
+            this.ctx.fillRect(this.ctx.canvas.width/2 + m + Defaults.transferX, this.ctx.canvas.height/2 - 15 + Defaults.transferY, 2, 30);
+        }
+        this.ctx.closePath();
+        this.ctx.stroke();
+    }
+
+    Left(){
+        this.ctx.beginPath();
+        this.ctx.strokeStyle = "#9017db";
+        this.ctx.lineWidth = 3;
+        this.ctx.moveTo(this.ctx.canvas.width/2 + Defaults.transferX,this.ctx.canvas.height/2 + Defaults.transferY);
+        this.ctx.lineTo(-this.ctx.canvas.width,this.ctx.canvas.height/2 + Defaults.transferY);
         this.ctx.closePath();
         this.ctx.stroke();
 
@@ -44,54 +53,54 @@ export default class line {
         this.ctx.beginPath();
         this.ctx.strokeStyle = "#9017db";
         this.ctx.lineWidth = 3;
-        for (let m =60; m < this.ctx.canvas.width + Defaults.Grid.transferX + Defaults.Grid.transferY; m+=60) {
-            this.ctx.fillRect(this.ctx.canvas.width/2 - m + Defaults.Grid.transferX, this.ctx.canvas.height/2 - 15 + Defaults.Grid.transferY, 2, 30);
+        for (let m =60; m < this.ctx.canvas.width + Defaults.transferX + Defaults.transferY; m+= this.scalingWidth) {
+            this.ctx.fillRect(this.ctx.canvas.width/2 - m + Defaults.transferX, this.ctx.canvas.height/2 - 15 + Defaults.transferY, 2, 30);
         }
         this.ctx.closePath();
         this.ctx.stroke();
     }
 
     //ОСИ Y
-    Bottom(height){
+    Bottom(){
         this.ctx.beginPath();
         this.ctx.strokeStyle = "#9017db";
         this.ctx.lineWidth = 3;
-        this.ctx.moveTo(this.ctx.canvas.width/2 + Defaults.Grid.transferX, this.ctx.canvas.height/2 + Defaults.Grid.transferY);
-        this.ctx.lineTo(this.ctx.canvas.width/2 + Defaults.Grid.transferX, this.ctx.canvas.height/2 + this.ctx.canvas.height - Defaults.Grid.transferY);
+        this.ctx.moveTo(this.ctx.canvas.width/2 + Defaults.transferX, this.ctx.canvas.height/2 + Defaults.transferY);
+        this.ctx.lineTo(this.ctx.canvas.width/2 + Defaults.transferX, this.ctx.canvas.height/2 + this.ctx.canvas.height - Defaults.transferY);
         this.ctx.closePath();
         this.ctx.stroke();
 
         this.ctx.beginPath();
         this.ctx.strokeStyle = "#9017db";
         this.ctx.lineWidth = 3;
-        for (let m =60; m < this.ctx.canvas.width + Defaults.Grid.transferX + Defaults.Grid.transferY; m+=60) {
-            this.ctx.fillRect(this.ctx.canvas.width/2 - 15 + Defaults.Grid.transferX, this.ctx.canvas.height/2 + m + Defaults.Grid.transferY, 30, 2);
+        for (let m =60; m < this.ctx.canvas.width + Defaults.transferX + Defaults.transferY; m+=this.scalingHeight) {
+            this.ctx.fillRect(this.ctx.canvas.width/2 - 15 + Defaults.transferX, this.ctx.canvas.height/2 + m + Defaults.transferY, 30, 2);
         }
         this.ctx.closePath();
         this.ctx.stroke();
     }
 
-    Top(height){
+    Top(){
         this.ctx.beginPath();
         this.ctx.strokeStyle = "#9017db";
         this.ctx.lineWidth = 3;
-        this.ctx.moveTo(this.ctx.canvas.width/2 + Defaults.Grid.transferX, this.ctx.canvas.height/2 + Defaults.Grid.transferY);
-        this.ctx.lineTo(this.ctx.canvas.width/2 + Defaults.Grid.transferX, this.ctx.canvas.height/2 - this.ctx.canvas.height);
+        this.ctx.moveTo(this.ctx.canvas.width/2 + Defaults.transferX, this.ctx.canvas.height/2 + Defaults.transferY);
+        this.ctx.lineTo(this.ctx.canvas.width/2 + Defaults.transferX, this.ctx.canvas.height/2 - this.ctx.canvas.height);
         this.ctx.closePath();
         this.ctx.stroke();
 
         this.ctx.beginPath();
         this.ctx.strokeStyle = "#9017db";
         this.ctx.lineWidth = 3;
-        for (let m =60; m < this.ctx.canvas.width + Defaults.Grid.transferX + Defaults.Grid.transferY; m+=60) {
-            this.ctx.fillRect(this.ctx.canvas.width/2 - 15 + Defaults.Grid.transferX, this.ctx.canvas.height/2 - m + Defaults.Grid.transferY, 30, 2);
+        for (let m =60; m < this.ctx.canvas.width + Defaults.transferX + Defaults.transferY; m+=this.scalingHeight) {
+            this.ctx.fillRect(this.ctx.canvas.width/2 - 15 + Defaults.transferX, this.ctx.canvas.height/2 - m + Defaults.transferY, 30, 2);
         }
         this.ctx.closePath();
         this.ctx.stroke();
     }
 
     //Во всех направлениях линий
-    allDirections (width,height){
+    AxisDirections (){
        this.Right();
        this.Left();
        this.Bottom();

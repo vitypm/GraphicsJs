@@ -16,11 +16,18 @@ export default class grid {
         //Параметры из defaults
         else
         {
-            this.scalingWidth = scalingWidth;
-            this.scalingHeight = scalingHeight;
+            this.scalingWidth = Defaults.Grid.scalingWidth;
+            this.scalingHeight = Defaults.Grid.scalingHeight;
         }
 
      //   console.log("Grid accept");
+    }
+
+    Reut(){
+        return {
+            centerX: this.ctx.canvas.width/2,
+            centerY:this.ctx.canvas.height/2
+        }
     }
 
     grid()
@@ -28,18 +35,18 @@ export default class grid {
         let centerX = this.ctx.canvas.width; //Высчитываем середину
         let centerY = this.ctx.canvas.height; //Высчитываем середину
         this.ctx.beginPath();
-        this.ctx.strokeStyle = "#423124";
-        this.ctx.lineWidth = 3;
+        this.ctx.strokeStyle = Defaults.Grid.strokeStyle;
+        this.ctx.lineWidth = Defaults.Grid.lineWidth;
         //Вертикальные линий
-        for (let x = 1; x < this.ctx.canvas.width + Math.abs(Defaults.Grid.transferX); x += this.scalingWidth) {
-            this.ctx.moveTo(centerX - x + Defaults.Grid.transferX, centerY + Defaults.Grid.transferY);
-            this.ctx.lineTo(centerX - x + Defaults.Grid.transferX, centerY - this.ctx.canvas.height);
+        for (let x = 1; x < this.ctx.canvas.width + Math.abs(Defaults.transferX); x += this.scalingWidth) {
+            this.ctx.moveTo(centerX - x + Defaults.transferX, centerY + Defaults.transferY);
+            this.ctx.lineTo(centerX - x + Defaults.transferX, centerY - this.ctx.canvas.height);
         }
         //Горизантальные линий
-        for (let y = 1; y < this.ctx.canvas.height + Math.abs(Defaults.Grid.transferY); y += this.scalingHeight)
+        for (let y = 1; y < this.ctx.canvas.height + Math.abs(Defaults.transferY); y += this.scalingHeight)
         {
-            this.ctx.moveTo(centerX + Defaults.Grid.transferX, centerY - y + Defaults.Grid.transferY);
-            this.ctx.lineTo(centerX - this.ctx.canvas.width , centerY - y + Defaults.Grid.transferY);
+            this.ctx.moveTo(centerX + Defaults.transferX, centerY - y + Defaults.transferY);
+            this.ctx.lineTo(centerX - this.ctx.canvas.width , centerY - y + Defaults.transferY);
         }
         this.ctx.closePath();
         this.ctx.stroke();
@@ -53,18 +60,18 @@ export default class grid {
         * Слево сверху
         */
         this.ctx.beginPath();
-        this.ctx.strokeStyle = "#423124";
-        this.ctx.lineWidth = 3;
+        this.ctx.strokeStyle = Defaults.Grid.strokeStyle;
+        this.ctx.lineWidth = Defaults.Grid.lineWidth;
         //Вертикальные линий
-        for (let x = 1; x < this.ctx.canvas.width + Math.abs(Defaults.Grid.transferX); x += this.scalingWidth) {
-            this.ctx.moveTo(centerX - x + Defaults.Grid.transferX, centerY + Defaults.Grid.transferY);
-            this.ctx.lineTo(centerX - x + Defaults.Grid.transferX, centerY - this.ctx.canvas.height);
+        for (let x = 1; x < this.ctx.canvas.width + Math.abs(Defaults.transferX); x += this.scalingWidth) {
+            this.ctx.moveTo(centerX - x + Defaults.transferX, centerY + Defaults.transferY);
+            this.ctx.lineTo(centerX - x + Defaults.transferX, centerY - this.ctx.canvas.height);
         }
         //Горизантальные линий
-        for (let y = 1; y < this.ctx.canvas.height + Math.abs(Defaults.Grid.transferY); y += this.scalingHeight)
+        for (let y = 1; y < this.ctx.canvas.height + Math.abs(Defaults.transferY); y += this.scalingHeight)
         {
-            this.ctx.moveTo(centerX + Defaults.Grid.transferX, centerY - y + Defaults.Grid.transferY);
-            this.ctx.lineTo(centerX - this.ctx.canvas.width, centerY - y + Defaults.Grid.transferY);
+            this.ctx.moveTo(centerX + Defaults.transferX, centerY - y + Defaults.transferY);
+            this.ctx.lineTo(centerX - this.ctx.canvas.width, centerY - y + Defaults.transferY);
         }
         this.ctx.closePath();
         this.ctx.stroke();
@@ -72,19 +79,19 @@ export default class grid {
         * Справо сверху
         */
         this.ctx.beginPath();
-        this.ctx.strokeStyle = "#423124";
-        this.ctx.lineWidth = 3;
+        this.ctx.strokeStyle = Defaults.Grid.strokeStyle;
+        this.ctx.lineWidth = Defaults.Grid.lineWidth;
         //Вертикальные линий
-        for (let x = 1; x < this.ctx.canvas.width + Math.abs(Defaults.Grid.transferX); x += this.scalingWidth)
+        for (let x = 1; x < this.ctx.canvas.width + Math.abs(Defaults.transferX); x += this.scalingWidth)
         {
-            this.ctx.moveTo(centerX + x + Defaults.Grid.transferX, centerY + Defaults.Grid.transferY);
-            this.ctx.lineTo(centerX + x + Defaults.Grid.transferX,centerY - this.ctx.canvas.height);
+            this.ctx.moveTo(centerX + x + Defaults.transferX, centerY + Defaults.transferY);
+            this.ctx.lineTo(centerX + x + Defaults.transferX,centerY - this.ctx.canvas.height);
         }
         //Горизантальные линий
-        for (let y = 1; y < this.ctx.canvas.height + Math.abs(Defaults.Grid.transferY); y += this.scalingHeight)
+        for (let y = 1; y < this.ctx.canvas.height + Math.abs(Defaults.transferY); y += this.scalingHeight)
         {
-            this.ctx.moveTo(centerX + Defaults.Grid.transferX, centerY - y + Defaults.Grid.transferY);
-            this.ctx.lineTo(centerX + this.ctx.canvas.width, centerY - y + Defaults.Grid.transferY);
+            this.ctx.moveTo(centerX + Defaults.transferX, centerY - y + Defaults.transferY);
+            this.ctx.lineTo(centerX + this.ctx.canvas.width, centerY - y + Defaults.transferY);
         }
         this.ctx.closePath();
         this.ctx.stroke();
@@ -92,19 +99,19 @@ export default class grid {
         * Справо снизу
         */
         this.ctx.beginPath();
-        this.ctx.strokeStyle = "#423124";
-        this.ctx.lineWidth = 3;
+        this.ctx.strokeStyle = Defaults.Grid.strokeStyle;
+        this.ctx.lineWidth = Defaults.Grid.lineWidth;
         //Вертикальные линий
-        for (let x = 1; x <  this.ctx.canvas.width + Math.abs(Defaults.Grid.transferX); x += this.scalingWidth)
+        for (let x = 1; x <  this.ctx.canvas.width + Math.abs(Defaults.transferX); x += this.scalingWidth)
         {
-            this.ctx.moveTo(centerX + x + Defaults.Grid.transferX, centerY + Defaults.Grid.transferY);
-            this.ctx.lineTo(centerX + x + Defaults.Grid.transferX, centerY + this.ctx.canvas.height);
+            this.ctx.moveTo(centerX + x + Defaults.transferX, centerY + Defaults.transferY);
+            this.ctx.lineTo(centerX + x + Defaults.transferX, centerY + this.ctx.canvas.height);
         }
         //Горизантальные лини
-        for (let y = 1; y < this.ctx.canvas.height + Math.abs(Defaults.Grid.transferY); y += this.scalingHeight)
+        for (let y = 1; y < this.ctx.canvas.height + Math.abs(Defaults.transferY); y += this.scalingHeight)
         {
-            this.ctx.moveTo(centerX + Defaults.Grid.transferX, centerY + y + Defaults.Grid.transferY);
-            this.ctx.lineTo(centerX + this.ctx.canvas.width ,centerY + y + Defaults.Grid.transferY);
+            this.ctx.moveTo(centerX + Defaults.transferX, centerY + y + Defaults.transferY);
+            this.ctx.lineTo(centerX + this.ctx.canvas.width ,centerY + y + Defaults.transferY);
         }
         this.ctx.closePath();
         this.ctx.stroke();
@@ -112,19 +119,19 @@ export default class grid {
         * Слево снизу
         */
         this.ctx.beginPath();
-        this.ctx.strokeStyle = "#423124";
-        this.ctx.lineWidth = 3;
+        this.ctx.strokeStyle = Defaults.Grid.strokeStyle;
+        this.ctx.lineWidth = Defaults.Grid.lineWidth;
         //Вертикальные линий
-        for (let x = 1; x <  this.ctx.canvas.width + Math.abs(Defaults.Grid.transferX); x += this.scalingWidth)
+        for (let x = 1; x <  this.ctx.canvas.width + Math.abs(Defaults.transferX); x += this.scalingWidth)
         {
-            this.ctx.moveTo(centerX - x + Defaults.Grid.transferX, centerY + Defaults.Grid.transferY);
-            this.ctx.lineTo(centerX - x + Defaults.Grid.transferX,centerY + this.ctx.canvas.height);
+            this.ctx.moveTo(centerX - x + Defaults.transferX, centerY + Defaults.transferY);
+            this.ctx.lineTo(centerX - x + Defaults.transferX,centerY + this.ctx.canvas.height);
         }
         //Горизантальные линий
-        for (let y = 1; y < this.ctx.canvas.height + Math.abs(Defaults.Grid.transferY); y += this.scalingHeight)
+        for (let y = 1; y < this.ctx.canvas.height + Math.abs(Defaults.transferY); y += this.scalingHeight)
         {
-            this.ctx.moveTo(centerX + Defaults.Grid.transferX, centerY + y + Defaults.Grid.transferY);
-            this.ctx.lineTo(centerX - this.ctx.canvas.width, centerY + y + Defaults.Grid.transferY);
+            this.ctx.moveTo(centerX + Defaults.transferX, centerY + y + Defaults.transferY);
+            this.ctx.lineTo(centerX - this.ctx.canvas.width, centerY + y + Defaults.transferY);
         }
         this.ctx.closePath();
         this.ctx.stroke();

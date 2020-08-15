@@ -17,45 +17,48 @@ export default class label {
         //Параметры из defaults
         else
         {
-            this.scalingWidth = scalingWidth;
-            this.scalingHeight = scalingHeight;
+            this.scalingWidth = Defaults.Grid.scalingWidth;
+            this.scalingHeight = Defaults.Grid.scalingHeight;
         }
      //   console.log("Label accept");
     }
     O(){
         this.ctx.beginPath();
-        this.ctx.strokeStyle = "black";
-        this.ctx.font = '12 px Segoe UI';
-        this.ctx.lineWidth = 1;
+        this.ctx.strokeStyle = Defaults.Label.strokeStyle;
+        this.ctx.font = Defaults.Label.font;
+        this.ctx.lineWidth = Defaults.Label.lineWidth;
         this.ctx.strokeText("0",this.ctx.canvas.width/2,this.ctx.canvas.height/2);
         this.ctx.closePath();
         this.ctx.stroke();
     }
     AxisLabel(){
         this.ctx.beginPath();
-        this.ctx.font = '14px serif';
-        this.ctx.strokeStyle = "black";
-        this.ctx.lineWidth = 1;
+        this.ctx.font = Defaults.Label.font;
+        this.ctx.strokeStyle = Defaults.Label.strokeStyle;
+        this.ctx.lineWidth = Defaults.Label.lineWidth;
 
+        //Right
         let text = 0;
-        for (let x = 0; x < this.ctx.canvas.width + Math.abs(Defaults.Grid.transferX); x += this.scalingWidth) {
-            this.ctx.strokeText(text,this.ctx.canvas.width/2 + x + 10 + Defaults.Grid.transferX,this.ctx.canvas.height/2 - 20 + Defaults.Grid.transferY);
+        for (let x = 0; x < this.ctx.canvas.width + Math.abs(Defaults.transferX); x += this.scalingWidth) {
+            this.ctx.strokeText(text,this.ctx.canvas.width/2 + x + Defaults.Label.paddingX + Defaults.transferX,this.ctx.canvas.height/2 - Defaults.Label.paddingY + Defaults.transferY);
             text++;
         }
-
+        //Left
         let text2 = 0;
-        for (let x = 0; x < this.ctx.canvas.width + Math.abs(Defaults.Grid.transferX); x += this.scalingWidth) {
-            this.ctx.strokeText(text2, this.ctx.canvas.width/2 - x + 10 + Defaults.Grid.transferX, this.ctx.canvas.height/2 - 20 + Defaults.Grid.transferY); //Это вправо
+        for (let x = 0; x < this.ctx.canvas.width + Math.abs(Defaults.transferX); x += this.scalingWidth) {
+            this.ctx.strokeText(text2, this.ctx.canvas.width/2 - x + Defaults.Label.paddingX + Defaults.transferX, this.ctx.canvas.height/2 - Defaults.Label.paddingY + Defaults.transferY);
             text2--;
         }
+        //Top
         let text3 = 0;
-        for (let y = 0; y < this.ctx.canvas.height + Math.abs(Defaults.Grid.transferY); y += this.scalingHeight) {
-            this.ctx.strokeText(text3, this.ctx.canvas.width/2 + 10 + Defaults.Grid.transferX, this.ctx.canvas.height/2 - y - 20 + Defaults.Grid.transferY); //Это вверх
+        for (let y = 0; y < this.ctx.canvas.height + Math.abs(Defaults.transferY); y += this.scalingHeight) {
+            this.ctx.strokeText(text3, this.ctx.canvas.width/2 + Defaults.Label.paddingX + Defaults.transferX, this.ctx.canvas.height/2 - y - Defaults.Label.paddingY + Defaults.transferY);
             text3++;
         }
+        //Bottom
         let text4 = 0;
-        for (let y = 0; y < this.ctx.canvas.height + Math.abs(Defaults.Grid.transferY); y += this.scalingHeight) {
-            this.ctx.strokeText(text4, this.ctx.canvas.width/2 + 10 + Defaults.Grid.transferX, this.ctx.canvas.height/2 + y - 20 + Defaults.Grid.transferY); //Это вверх
+        for (let y = 0; y < this.ctx.canvas.height + Math.abs(Defaults.transferY); y += this.scalingHeight) {
+            this.ctx.strokeText(text4, this.ctx.canvas.width/2 + Defaults.Label.paddingX + Defaults.transferX, this.ctx.canvas.height/2 + y - Defaults.Label.paddingY + Defaults.transferY);
             text4--;
         }
         this.ctx.closePath();

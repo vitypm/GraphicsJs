@@ -16,13 +16,13 @@ export default class polar {
         //Параметры из defaults
         else
         {
-            this.scalingWidth = scalingWidth;
-            this.scalingHeight = scalingHeight;
+            this.scalingWidth = Defaults.Grid.scalingWidth;
+            this.scalingHeight = Defaults.Grid.scalingHeight;
         }
     }
     draw() {
-        let centerX = this.ctx.canvas.width/2 + Defaults.Grid.transferX; //Высчитываем середину
-        let centerY = this.ctx.canvas.height/2 + Defaults.Grid.transferY; //Высчитываем середину
+        let centerX = this.ctx.canvas.width/2 + Defaults.transferX; //Высчитываем середину
+        let centerY = this.ctx.canvas.height/2 + Defaults.transferY; //Высчитываем середину
 
         //Статика
         this.ctx.beginPath();

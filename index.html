@@ -10,6 +10,7 @@
         body {
             padding: 0;
             margin: 0;
+            overflow: hidden;
         }
         #canvas {
 
@@ -32,6 +33,8 @@
     let test = new Graphics('canvas');
 
 
+
+
   //  test.scaling();
 
 
@@ -44,19 +47,77 @@
 
     import {Defaults} from './defaults.js';
     window.onload = init;
-    let x = 0,y;
+    let mouseIsDown = false;
+    let x = 0;
+    let y = 0;
     let flag = true;
+    //ередина
+    let centerX = test.Grid.Reut().centerX
+    let centerY = test.Grid.Reut().centerY
+
+    let testB = true;
+
+
+
+    let movex = 0, movey;
+
     function init()
  {
     test.scaling();
     test.grid();
 
+
+
+
+     test.canvas.onmousedown = function (e)
+     {
+         movex = e.x - test.canvas.width/2; //позиция захвата
+         movey = e.y - test.canvas.height/2;
+
+
+        console.log("onmousedown: " + movex);
+
+        init();
+        mouseIsDown = true;
+     }
+
+     test.canvas.onmouseup = function(e)
+     {
+         movex = e.x - test.canvas.width/2; //позиция захвата
+         movey = e.y - test.canvas.height/2;
+         init();
+         mouseIsDown = false;
+     }
+
+     test.canvas.onmousemove = function(e)
+     {
+         if(!mouseIsDown) return 0;
+
+            x = e.x - test.canvas.width/2; // позиция мыши
+            y = e.y - test.canvas.height/2;
+
+
+          //  let DX, DY
+         //   DX = x - movex;
+        //    DY = y - movey;
+       //     let length =  Math.sqrt(Math.pow(DX,2) + Math.pow(DY,2))
+
+            Defaults.transferX +=  (x - movex) / 60;
+            Defaults.transferY +=  (y - movey) /  60;
+         init(); //update
+
+     }
+
   }
 
 
+    window.onclick = function(e)
+    {
+        init();
+        console.log("w: " + Defaults.transferX)
+    }
 
-
-    window.onresize = init;
+   window.onresize = init;
 
 
     /*
