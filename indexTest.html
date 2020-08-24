@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+            overflow: hidden;
+        }
+        #canvas {
+
+        }
+
+
+    </style>
+</head>
+<body>
+
+
+<canvas id="canvas" ></canvas>
+
+<script type="module">
+let canvas = document.getElementById('canvas');
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+
+let ctx = canvas.getContext('2d');
+
+//console.log(canvas)
+
+
+//let y = x => Math.pow(x,3) + Math.pow(y(x),3) - 3*5*y(x)  ; // функция
+
+let Y = function r (x) {
+    return x*x;
+}
+
+    let zoom = 50; //масштаб
+    console.log("ctx: " + ctx)
+    //Центр
+
+    console.log(ctx)
+
+let mouseIsDown = false;
+let x, y;
+let transferX = 0,
+    transferY = 0;
+
+
+function draw()
+{
+//    ctx.closePath(); //Закрываем все пути
+  //  ctx.clearRect(0,0,canvas.width/2 + transferX, canvas.height/2 + transferY); //Очищаем весь график
+
+    //Центр
+    ctx.translate(canvas.width/2 + transferX, canvas.height/2 + transferY);
+
+    ctx.beginPath();
+    ctx.strokeStyle = "black";
+    ctx.lineWidth = 2;
+    for (let x = -canvas.width + transferX; x < canvas.width + transferX; x+=5) {
+        ctx.moveTo(x*zoom, -canvas.height/2 - transferY);
+        ctx.lineTo(x*zoom, canvas.height/2 - transferY);
+        ctx.moveTo(-canvas.width/2 - transferX, x*zoom);
+        ctx.lineTo(canvas.width/2 - transferX, x*zoom);
+    }
+    ctx.stroke();
+ //   ctx.closePath();
+//график функции
+    ctx.strokeStyle = "red";
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    for (let i = -canvas.width; i <= canvas.width; i += 0.01) {
+        ctx[i?'lineTo':'moveTo'](i*zoom, -Y(i)*zoom);
+    }
+    ctx.stroke();
+  //  ctx.closePath();
+}
+
+function update()
+{
+    //Получаем текущие значения от окна и передаём в canvas
+    canvas.height = window.innerHeight;
+    canvas.width = window.innerWidth;
+    console.log(canvas.getBoundingClientRect())
+    //Передаем сам график
+    draw();
+}
+let movex,
+    movey;
+
+
+canvas.onwheel = function (e)
+{
+    console.log(e);
+    zoom -= e.deltaY;
+    movex = e.x - canvas.width/2; //позиция захвата
+    movey = e.y - canvas.height/2;
+   update();
+}
+
+
+
+canvas.onmousedown = function (e)
+{
+    movex = e.x - canvas.width/2; //позиция захвата
+    movey = e.y - canvas.height/2;
+    mouseIsDown = true;
+    update();
+    console.log(e);
+}
+
+canvas.onmouseup = function(e)
+{
+    movex = e.x - canvas.width/2; //позиция захвата
+    movey = e.y - canvas.height/2;
+    update();
+    mouseIsDown = false;
+}
+
+
+canvas.onmousemove = function(e)
+{
+    if(!mouseIsDown) return;
+    x = e.x - canvas.width/2; // позиция мыши
+    y = e.y - canvas.height/2;
+   // console.log(x)
+    transferX +=  (x - movex) ;
+    transferY +=  (y - movey) ;
+    update(); //update
+   // console.log(e);
+}
+
+canvas.onmouseout = function (e) {
+    canvas.style.cursor = "default";
+    mouseIsDown = false;
+    update(); //update
+}
+
+
+
+window.onresize = update;
+window.onload = update;
+
+
+
+</script>
+
+</body>
+</html>

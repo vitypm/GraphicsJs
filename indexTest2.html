@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+            overflow: hidden;
+        }
+        #canvas {
+
+        }
+
+
+    </style>
+</head>
+<body>
+
+
+<canvas id="canvas" ></canvas>
+
+<script>
+    let canvas = document.getElementById('canvas');
+    let ctx = canvas.getContext('2d')
+    let zoom = 60;
+
+    let mouseIsDown = false;
+
+    let transferX = 0;
+    let transferY = 0;
+
+    let movex = 0;
+    let movey = 0;
+
+    let poX = 0;
+    let poY = 0;
+
+    canvas.width = innerWidth;
+    canvas.height = innerHeight;
+
+    console.log(canvas.width)
+    console.log(canvas.height)
+
+
+
+
+    function grid() {
+        ctx.translate(canvas.width/2 + transferX,canvas.height/2 + transferY);
+     //   console.log(canvas.width)
+      //  ctx.translate(canvas.width/2 + Math.abs(transferX),canvas.height/2 + Math.abs(transferY));
+        ctx.beginPath();
+        ctx.strokeStyle = "black";
+        ctx.lineWidth = 0.5;
+        console.log(transferX)
+        for (let x = -canvas.width; x < canvas.width; x+=1) {
+            /*
+            ctx.moveTo(x*zoom, -canvas.height/2 - transferY);
+            ctx.lineTo(x*zoom , canvas.height/2 + transferY);
+            ctx.moveTo(-canvas.width/2 - transferX, x*zoom );
+            ctx.lineTo(canvas.width/2 + transferX, x*zoom );
+            */
+         //   ctx.moveTo(x*zoom , -canvas.height/2 - Math.abs(transferY));
+          //  ctx.lineTo(x*zoom , canvas.height/2 +  Math.abs(transferY));
+            ctx.moveTo(-canvas.width/2 - Math.abs(transferX), x*zoom );
+            ctx.lineTo(canvas.width/2 + Math.abs(transferX), x*zoom) ;
+        }
+
+        for (let y = -canvas.width; y < canvas.width; y+=1) {
+            /*
+            ctx.moveTo(x*zoom, -canvas.height/2 - transferY);
+            ctx.lineTo(x*zoom , canvas.height/2 + transferY);
+            ctx.moveTo(-canvas.width/2 - transferX, x*zoom );
+            ctx.lineTo(canvas.width/2 + transferX, x*zoom );
+            */
+            ctx.moveTo(y*zoom , -canvas.height/2 - Math.abs(transferY));
+            ctx.lineTo(y*zoom , canvas.height/2 +  Math.abs(transferY));
+        }
+
+
+        ctx.stroke();
+        ctx.closePath();
+    }
+
+    function O() {
+        ctx.beginPath();
+        ctx.strokeStyle = "black";
+        ctx.lineWidth = 0.5;
+        ctx.moveTo(canvas.width/2, canvas.height/2);
+        ctx.fillRect(-5 ,-5 ,10,10);
+        ctx.stroke();
+        ctx.closePath();
+    }
+
+    function windowToCanvas(canvas, x, y) {
+        let bbox = canvas.getBoundingClientRect();
+        return {
+            x: x - bbox.left * (canvas.width / bbox.width),
+            y: y - bbox.top * (canvas.height / bbox.height)
+        };
+    }
+
+    function drawHorizontalLine(y) {
+        ctx.beginPath();
+        ctx.moveTo(0, y + 0.5);
+        ctx.lineTo(canvas.width, y + 0.5);
+        ctx.stroke();
+        ctx.closePath();
+    }
+
+    function drawVerticalLine(x) {
+        ctx.beginPath();
+        ctx.moveTo(x + 0.5, 0);
+        ctx.lineTo(x + 0.5, canvas.height);
+        ctx.stroke();
+        ctx.closePath();
+    }
+
+    function drawGuidelines(x, y) {
+        ctx.strokeStyle = 'red';
+        ctx.lineWidth = 2;
+        drawVerticalLine(x);
+        drawHorizontalLine(y);
+    }
+
+
+
+function update(){
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    grid()
+    O()
+
+}
+
+
+
+
+    canvas.onmousedown = function (event)
+    {
+        movex = event.x - canvas.width/2; //позиция захвата
+        movey = event.y - canvas.height/2;
+        update()
+        mouseIsDown = true;
+    }
+        canvas.onmousemove = function (event)
+        {
+                //let loc = windowToCanvas(canvas, event.clientX, event.clientY);
+               // drawGuidelines(event.clientX, event.clientY);
+
+        }
+
+        canvas.addEventListener('mousemove', function (event) {
+          //  console.log(event.x)
+          //  console.log(event.y)
+            let f = canvas.width;
+            let fg = canvas.height;
+            if(!mouseIsDown)  {
+
+
+
+                return 0;
+
+            }
+            else if (mouseIsDown === false) {
+
+
+            }
+           
+            poX = event.x - canvas.width/2; // позиция мыши
+            poY = event.y - canvas.height/2;
+            transferX += (poX - movex) / 15;
+            transferY += (poY - movey) / 15;
+            update()
+
+           // drawGuidelines(event.x, event.y);
+
+        })
+
+
+        canvas.onmouseup = function(event)
+        {
+          mouseIsDown = false;
+          update()
+        }
+
+
+
+
+
+    window.onload = function (event)
+    {
+        update()
+    }
+
+    window.onresize = function (event)
+    {
+        update()
+     //   let loc = windowToCanvas(canvas, event.clientX, event.clientY);
+      //  drawGuidelines(loc.x, loc.y);
+    }
+
+
+
+</script>
+</body>
+</html>

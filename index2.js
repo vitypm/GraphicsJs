@@ -6,7 +6,7 @@ class прослойка, нужна для того чтобы можно бы�
 
  */
 
-export default  class Graphics {
+class Graphicss {
     constructor(id, art = '2d')
     {
         this.canvas = document.getElementById(id);
@@ -18,41 +18,45 @@ export default  class Graphics {
                 antialias:true
             }
         );
-        this.Grid = new Coordinate.Grid(this.ctx,60,60,2);
-        this.Polar = new Coordinate.Polar(this.ctx,60,60,2);
-        this.Line = new Coordinate.Line(this.ctx,60,60,2);
-        this.Label = new Coordinate.Label(this.ctx,60,60,2);
+        this.Grid = new Coordinate.Grid(this.ctx,80,80,2);
+        this.Polar = new Coordinate.Polar(this.ctx,80,80,2);
+        this.Line = new Coordinate.Line(this.ctx,80,80,2);
+        this.Label = new Coordinate.Label(this.ctx,80,80,2);
         this.Graph = new Coordinate.Graph(this.ctx);
+        this.Animate = new Coordinate.Animate(this.ctx);
     }
     //Масштабирование
     scaling()
     {
-
         this.ctx.canvas.width = window.innerWidth;
         this.ctx.canvas.height = window.innerHeight;
-        this.Grid = new Coordinate.Grid(this.ctx, 60, 60, 2);
-
-
-        this.Polar = new Coordinate.Polar(this.ctx,60,60,2);
-        this.Line = new Coordinate.Line(this.ctx,60,60,2);
-        this.Label = new Coordinate.Label(this.ctx,60,60,2);
+        this.Grid = new Coordinate.Grid(this.ctx, 80, 80, 2);
+        this.Polar = new Coordinate.Polar(this.ctx,80,80,2);
+        this.Line = new Coordinate.Line(this.ctx,80,80,2);
+        this.Label = new Coordinate.Label(this.ctx,80,80,2);
         this.Graph = new Coordinate.Graph(this.ctx);
-
+        this.Animate = new Coordinate.Animate(this.ctx)
     }
 
     grid(par = 0){
-
-
-
-
-        this.ctx.imageSmoothingQuality = "high"
-      this.Grid.centerGrid();
-    //    this.Polar.draw();
-       this.Line.AxisDirections();
-       this.Label.AxisLabel();
-
-    //    this.Graph.draw();
+      //  this.ctx.imageSmoothingQuality = "high"
+        this.Grid.centerGrid();
     }
+
+    line(){
+        this.Line.AxisDirections();
+    }
+    label(){
+        this.Label.AxisLabel();
+    }
+    graf(){
+        this.Graph.draw();
+    }
+    polar(){
+        this.Polar.draw();
+    }
+
+
 
     get Width(){
         return this.canvas.width;
@@ -71,5 +75,6 @@ export default  class Graphics {
     }
 
 
-
 }
+
+export default Graphicss;

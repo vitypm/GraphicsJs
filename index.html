@@ -21,16 +21,23 @@
 </head>
 <body>
 
+<div class="panel">
+    <div class="panelBlock">
 
-<canvas id="canvas" ></canvas>
-
+    </div>
+</div>
+<canvas id="canvas"></canvas>
 
 
 
 <!--  -->
 <script type="module">
-    import Graphics from './index2.js'; // не {User}, просто User
-    let test = new Graphics('canvas');
+    import GraficsG from './index4.js';
+
+    let g = new GraficsG('canvas');
+   // g.draw();
+    //  import Graphics from './index2.js'; // не {User}, просто User
+   // let test = new Graphics('canvas');
 
 
 
@@ -44,29 +51,152 @@
         test.setHeight(window.innerHeight);
     }
     */
-
+/*
     import {Defaults} from './defaults.js';
-    window.onload = init;
+   window.onload = init;
+
     let mouseIsDown = false;
+    let mousemove = false;
     let x = 0;
     let y = 0;
     let flag = true;
     //ередина
-    let centerX = test.Grid.Reut().centerX
-    let centerY = test.Grid.Reut().centerY
+
 
     let testB = true;
 
 
-
+    let x1;
+    let y1;
+    let d = 0;
+    let size = 100;
+    let rotate = 0;
+    let timer = 0;
+    let timer2;
     let movex = 0, movey;
-
-    function init()
- {
-    test.scaling();
-    test.grid();
+    let ctxx = test.ctx;
+    let ccttxx = test.ctx;
 
 
+    let centerXx = window.innerWidth/2;
+    let centerYy = window.innerHeight/2;
+    let count4
+    let x2
+    let y2
+
+    //Полярка
+    let DL = test.ctx;
+    DL.canvas.width = window.innerWidth;
+    DL.canvas.height = window.innerHeight;
+
+    let wDL = DL.width/2;
+    let hDL = DL.height/2;
+
+    function p(r = 130) {
+        return ( 3 * Math.cos(r) * Math.sin(r) ) / (Math.pow(Math.cos(r),2) + Math.pow(Math.sin(r),2) )
+    }
+
+    function param(x,a = 135) {
+        let l = (3 * a)/Math.sqrt(2)
+       let Graf = x * Math.sqrt((l+x)/(l-3*x))
+        return Graf;
+    }
+
+    function Grp() {
+        DL.beginPath();
+        DL.moveTo(wDL + Defaults.transferX, hDL + Defaults.transferY);
+        for(let c = 0; c < 360; c+=1) {
+          //  DL.lineTo(c + Defaults.transferX,p(c) + Defaults.transferY)
+            DL.fillRect(wDL + param(c), hDL + param(c), 8, 8);
+            DL.stroke();
+        }
+
+      //  DL.closePath();
+    }
+
+    Grp();
+
+*/
+
+
+   /*
+    ccttxx.lineWidth = 5; //Размер
+
+
+    let t = 0;
+    // Анимируем
+    function animate() {
+        count4 =  requestAnimationFrame(animate);
+        for(t = 0 ; t <= count4  * 0.01; t += 0.01)
+        {
+               ccttxx.beginPath();
+               ccttxx.moveTo(centerXx + Defaults.transferX, centerYy + Defaults.transferY);
+               x2 =  3 * (Math.tan(t))/ (1 + Math.pow(Math.tan(t),3)  ); //t * Math.sin(t);
+               y2 =  3 * (Math.pow(Math.tan(t),2) )/ ( 1 + Math.pow(Math.tan(t),3)  ); //-t * Math.cos(t);
+               let tempX = x2;
+               let tempY = y2;
+               x2 = centerXx  + (size) * (tempX * Math.cos(130) - tempY * Math.sin(130)) //rotate X
+               y2 = centerYy + (size) * (tempX * Math.sin(130) + tempY * Math.cos(130)) //rotate Y\
+               ccttxx.fillRect(x2 + Defaults.transferX,y2 + Defaults.transferY,5,5);
+             //    ccttxx.lineTo(x2 + Defaults.transferX,y2 + Defaults.transferY)
+               ccttxx.stroke();
+               ccttxx.closePath();
+        }
+
+        console.log(t)
+        if(count4 < 42) {
+            console.log(count4)
+         //   cancelAnimationFrame(animate)
+        }
+
+
+    }
+    if (t < 2) {
+        t += 1;
+    }
+  //  requestAnimationFrame(animate);
+
+
+
+*/
+
+  //  function init() {
+
+   //     test.scaling();
+   //     test.grid();
+
+
+     //    test.moveByTouch();
+        /*
+        let centerX = window.innerWidth / 2;
+        let centerY = window.innerHeight / 2;
+
+
+
+        ctxx.beginPath();
+        ctxx.moveTo(centerX + Defaults.transferX, centerY + Defaults.transferY);
+        ctxx.lineWidth = 5;
+        x1 = 3 * (Math.tan(d)) / (1 + Math.tan(d) * Math.tan(d) * Math.tan(d)); //t * Math.sin(t);
+        y1 = 3 * (Math.tan(d) * Math.tan(d)) / (1 + Math.tan(d) * Math.tan(d) * Math.tan(d)); //-t * Math.cos(t);
+        d = d + 0.01;
+        let tempX = x1;
+        let tempY = y1;
+
+        x1 = centerX + (size) * (tempX * Math.cos(0) - tempY * Math.sin(0)) //rotate X
+        y1 = centerY + (size) * (tempX * Math.sin(0) + tempY * Math.cos(0)) //rotate Y
+
+        ctxx.strokeStyle = "#ff0000";
+        //  ctxx.lineTo(x1 + Defaults.transferX,y1 + Defaults.transferY);
+
+        ctxx.fillRect(x1 + Defaults.transferX - 7, y1 + Defaults.transferY, 14, 14);
+
+        ctxx.stroke();
+        ctxx.closePath();
+
+        timer = setTimeout(init, 50);
+*/
+        //  console.log(timer)
+/*
 
 
      test.canvas.onmousedown = function (e)
@@ -75,154 +205,69 @@
          movey = e.y - test.canvas.height/2;
 
 
-        console.log("onmousedown: " + movex);
-
+      //  console.log("onmousedown: " + movex);
+         clearTimeout(timer)
         init();
+
         mouseIsDown = true;
      }
 
      test.canvas.onmouseup = function(e)
      {
-         movex = e.x - test.canvas.width/2; //позиция захвата
-         movey = e.y - test.canvas.height/2;
-         init();
+       movex = e.x - test.canvas.width/2 - 60; //позиция захвата
+       movey = e.y - test.canvas.height/2 - 60;
+
+       Defaults.transferX +=  (x - movex) / 15;
+       Defaults.transferY +=  (y - movey) /  15;
+         clearTimeout(timer)
+      init();
+         test.canvas.style.cursor = "default";
+
          mouseIsDown = false;
      }
 
      test.canvas.onmousemove = function(e)
      {
          if(!mouseIsDown) return 0;
-
+         test.canvas.style.cursor = "move";
             x = e.x - test.canvas.width/2; // позиция мыши
             y = e.y - test.canvas.height/2;
-
-
+      //     console.log(x)
           //  let DX, DY
          //   DX = x - movex;
         //    DY = y - movey;
        //     let length =  Math.sqrt(Math.pow(DX,2) + Math.pow(DY,2))
 
-            Defaults.transferX +=  (x - movex) / 60;
-            Defaults.transferY +=  (y - movey) /  60;
+            Defaults.transferX +=  (x - movex) / 15;
+            Defaults.transferY +=  (y - movey) /  15;
+
+         clearTimeout(timer)
+         init(); //update
+
+
+  //   }
+
+     test.canvas.onmouseout = function (e) {
+         test.canvas.style.cursor = "default";
+         mouseIsDown = false;
+         clearTimeout(timer)
+         init(); //update mouseIsDown = false;
+
+     }
+     test.canvas.onmouseleave = function (e) {
+         test.canvas.style.cursor = "default";
+         mouseIsDown = false;
+         clearTimeout(timer)
          init(); //update
 
      }
-
-  }
-
-
-    window.onclick = function(e)
-    {
-        init();
-        console.log("w: " + Defaults.transferX)
-    }
-
-   window.onresize = init;
-
-
-    /*
-    onmousedown = function (e) {
-        console.log(e);
-        move(e);
-        function move(e) {
-            let x =  e.offsetX -  e.composedPath()[0].width/2;
-            let y = e.offsetY - e.composedPath()[0].height/2;
-            Defaults.Grid.transferX = x;
-            Defaults.Grid.transferY = y;
-        }
-        onmousemove = function(e)
-        {
-            move(e);
-
-        };
-
-        onmouseup = function()
-        {
-            onmousemove = null;
-            onmouseup = null;
-        }
-    }
-
-
-    ondragstart = function() {return false;};
- */
-    /*------------------------------------------------------------------*/
-
-
-
-  //  let rect = test.canvas;
-   // console.log(rect)
-   // rect.onmousedown = function (e) {
-    //   let rect =  test.canvas.getBoundingClientRect();
-   ///     let left = e.x;
-     //   let top = e.y;
-       // let right = rect.width + left;
-      //  let bottom  = rect.height + top;
-
-    //    console.log(rect)
-    //    console.log(e)
-       // console.log(bottom)
-  //  }
-
-/*
-    test.canvas.onmousedown = (e) =>
-    {
-        move(e);
-
-        function move(e) {
-        //    Defaults.Grid.transferX = e.x;
-        //    Defaults.Grid.transferY = e.y;
-            console.log(e);
-            console.log(e.y);
-        }
-
-        document.onmousemove = function(e)
-        {
-            move(e);
-            init();
-        };
-
-        test.canvas.onmouseup = function()
-        {
-            document.onmousemove = null;
-            test.canvas.onmouseup = null;
-        };
-
-    }
-    test.canvas.ondragstart = function()
-    {
-       return false;
-     };
-
 */
-  //  test.canvas.onmousedown = function(e) {
-/*
-            move(e);
-
-            function move(e){
-                Defaults.Grid.transferX = e.pageX;
-                Defaults.Grid.transferY = e.pageY;
-            }
-
-        document.onmousemove = function(e) {
-            move(e);
-            console.log(e);
-            init();
-        };
-
-        test.canvas.onmouseup = function() {
-            document.onmousemove = null;
-            test.canvas.onmouseup = null;
-
-        };
-*/
-  //  }
+ // }
+   // test.graf();
 
 
-  //  test.canvas.ondragstart = function() {
-   //     return false;
-  //  };
 
+ // window.onresize = init;
 
 
 

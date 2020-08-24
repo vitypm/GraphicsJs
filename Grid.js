@@ -32,8 +32,8 @@ export default class grid {
 
     grid()
     {
-        let centerX = this.ctx.canvas.width; //Высчитываем середину
-        let centerY = this.ctx.canvas.height; //Высчитываем середину
+        let centerX = this.ctx.canvas.width + Math.abs(Defaults.transferX); //Высчитываем середину
+        let centerY = this.ctx.canvas.height + Math.abs(Defaults.transferY); //Высчитываем середину
         this.ctx.beginPath();
         this.ctx.strokeStyle = Defaults.Grid.strokeStyle;
         this.ctx.lineWidth = Defaults.Grid.lineWidth;

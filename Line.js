@@ -33,7 +33,7 @@ export default class line {
         this.ctx.beginPath();
         this.ctx.strokeStyle = "#9017db";
         this.ctx.lineWidth = 3;
-        for (let m =60; m < this.ctx.canvas.width + Defaults.transferX + Defaults.transferY; m+= this.scalingWidth) {
+        for (let m =0; m < this.ctx.canvas.width + Math.abs(Defaults.transferX + Defaults.transferY) ; m+= this.scalingWidth) {
             this.ctx.fillRect(this.ctx.canvas.width/2 + m + Defaults.transferX, this.ctx.canvas.height/2 - 15 + Defaults.transferY, 2, 30);
         }
         this.ctx.closePath();
@@ -53,7 +53,7 @@ export default class line {
         this.ctx.beginPath();
         this.ctx.strokeStyle = "#9017db";
         this.ctx.lineWidth = 3;
-        for (let m =60; m < this.ctx.canvas.width + Defaults.transferX + Defaults.transferY; m+= this.scalingWidth) {
+        for (let m =2; m < this.ctx.canvas.width + Math.abs(Defaults.transferX + Defaults.transferY); m+= this.scalingWidth) {
             this.ctx.fillRect(this.ctx.canvas.width/2 - m + Defaults.transferX, this.ctx.canvas.height/2 - 15 + Defaults.transferY, 2, 30);
         }
         this.ctx.closePath();
@@ -73,7 +73,7 @@ export default class line {
         this.ctx.beginPath();
         this.ctx.strokeStyle = "#9017db";
         this.ctx.lineWidth = 3;
-        for (let m =60; m < this.ctx.canvas.width + Defaults.transferX + Defaults.transferY; m+=this.scalingHeight) {
+        for (let m =0; m < this.ctx.canvas.width + Math.abs(Defaults.transferX + Defaults.transferY); m+=this.scalingHeight) {
             this.ctx.fillRect(this.ctx.canvas.width/2 - 15 + Defaults.transferX, this.ctx.canvas.height/2 + m + Defaults.transferY, 30, 2);
         }
         this.ctx.closePath();
@@ -92,7 +92,7 @@ export default class line {
         this.ctx.beginPath();
         this.ctx.strokeStyle = "#9017db";
         this.ctx.lineWidth = 3;
-        for (let m =60; m < this.ctx.canvas.width + Defaults.transferX + Defaults.transferY; m+=this.scalingHeight) {
+        for (let m =2; m < this.ctx.canvas.width + Math.abs(Defaults.transferX + Defaults.transferY); m+=this.scalingHeight) {
             this.ctx.fillRect(this.ctx.canvas.width/2 - 15 + Defaults.transferX, this.ctx.canvas.height/2 - m + Defaults.transferY, 30, 2);
         }
         this.ctx.closePath();
